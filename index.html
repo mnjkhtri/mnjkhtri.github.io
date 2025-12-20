@@ -1,45 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>mnjkhtri · site</title>
-  <meta name="description" content="Personal site for mnjkhtri" />
-  <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#7dd3fc}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#081126 0%,#071022 100%);color:#e6eef6;display:flex;align-items:center;justify-content:center}
-    .container{max-width:920px;padding:48px;background:rgba(255,255,255,0.03);border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
-    h1{margin:0;font-size:1.6rem}
-    p.lead{margin:8px 0 0;color:var(--muted)}
-    .cta{display:inline-block;margin-top:18px;padding:10px 14px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#60a5fa);color:#022233;text-decoration:none;font-weight:600}
-    footer{margin-top:28px;color:var(--muted);font-size:0.9rem}
-    a{color:inherit}
-    @media (max-width:600px){.container{padding:28px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manoj Khatri</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <main class="container">
-    <header>
-      <div>
-        <h1>mnjkhtri</h1>
-        <p class="lead">A small personal site — welcome.</p>
-      </div>
-      <nav>
-        <a href="https://github.com/mnjkhtri/site" target="_blank" rel="noopener" title="Repository">Repo</a>
-      </nav>
-    </header>
+    <body>
+    <div id="site-header"></div>
 
-    <section>
-      <h2>Hi — this is the project's index</h2>
-      <p class="lead">This page was added as <code>index.html</code>. Replace this content with your project homepage, a README converted to HTML, or a landing page.</p>
-      <a class="cta" href="README.md">View README</a>
-    </section>
+    <main>
+        <h1>Manoj Khatri</h1>
+        <p class="lede">I read physics papers, play chess to slow down, and tinker with GPUs.</p>
 
-    <footer>
-      Created by <strong>mnjkhtri</strong>. Current date: 2025-12-20
-    </footer>
-  </main>
+        <section>
+            <h2>Timeline</h2>
+            <ul class="timeline-list">
+                <li>
+                    <div class="year">2024—Present</div>
+                    <div class="entry">
+                        <div class="title">Quantitative Researcher, 108 Capital Pte. Ltd.</div>
+                        <div class="subhead">Responsibilities</div>
+                        <ul class="responsibilities">
+                            <li>Make markets efficient.</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="year">2019—2024</div>
+                    <div class="entry">
+                        <div class="title">B.E. Computer Engineering, Pulchowk Campus</div>
+                        <div class="subhead">GPA</div>
+                        <ul class="responsibilities">
+                            <li>84.08%</li>
+                        </ul>
+                        <div class="subhead">Courses taken</div>
+                        <ul class="responsibilities">
+                            <li>Computer Programming</li>
+                            <li>Object Oriented Programming</li>
+                            <li>Digital Logic</li>
+                            <li>Data Structures & Algorithms</li>
+                            <li>Computer Organization & Architecture</li>
+                            <li>Operating Systems</li>
+                            <li>Database Management Systems</li>
+                            <li>Computer Networks & Security</li>
+                            <li>Software Engineering</li>
+                            <li>Theory of Computation</li>
+                            <li>Distributed Systems</li>
+                            <li>Big Data Technologies</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="year">2002</div>
+                    <div class="entry">
+                        <div class="title">Born.</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/layout.js"></script>
 </body>
 </html>

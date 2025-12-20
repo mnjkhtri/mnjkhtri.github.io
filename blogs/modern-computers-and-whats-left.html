@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Modern Computers Came To Be (and What’s Left?) - Manoj Khatri</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <article class="post">
+      <h1 class="post-title">How Modern Computers Came To Be (and What’s Left?)</h1>
+      <div class="post-quote">“A computer would deserve to be called intelligent if it could deceive a human into believing that it was human. - Alan Turng (probably)”</div>
+      <div class="post-meta">May 05, 2022</div>
+
+      <p>
+        Modern computers didn’t appear fully formed. They grew out of a sharp question from mathematics:
+        <em>what exactly counts as a mechanical calculation?</em>
+      </p>
+
+      <p>
+        At first this sounds like philosophy. But it isn’t. If you can define “mechanical procedure” precisely, then you can do three practical things:
+        (1) tell what problems are solvable by any program at all,
+        (2) explain why some problems can’t be solved no matter how clever you are,
+        and (3) design a single general machine that can run many different procedures—what we now call a computer.
+      </p>
+
+      <h2>Why mathematicians cared first</h2>
+      <p>
+        Euclid showed that a small set of axioms can generate a large body of geometry.
+        In the early 20th century, David Hilbert wanted a similar foundation for all of mathematics:
+        formal rules, formal proofs, and methods that could be carried out step-by-step without intuition.
+      </p>
+
+      <p>
+        This ambition crystallized into the <em>decision problem</em> (Entscheidungsproblem):
+        given a mathematical statement written in a formal system, is there a mechanical method that can decide whether it has a proof?
+        The moment you ask that, you’re forced to define what “mechanical method” even means.
+      </p>
+
+      <h2>Defining “effective procedure”</h2>
+      <p>
+        Several researchers tried to capture the same intuition in different ways.
+        One route was function-first: define a class of “calculable” functions from simple base cases and closure rules
+        (recursive function theory, developed across work by Gödel, Herbrand, Kleene, Church, and others).
+      </p>
+
+      <p>
+        Alan Turing took the machine-first route. He described a minimal abstract machine:
+        a tape of symbols, a head that reads and writes, and a finite table of rules for what to do next.
+        The model is intentionally bare, because the goal was to capture what a human clerk could do by rote, with unlimited paper.
+      </p>
+
+      <p>
+        The key result is that these different definitions converge: they describe the same set of computable functions.
+        That convergence is why the Church–Turing thesis is so persuasive:
+      </p>
+
+      <div class="math-block">“effectively calculable” ≈ “Turing-computable”</div>
+
+      <p>
+        The “≈” matters: the thesis isn’t a theorem (because “effectively calculable” isn’t a formal term).
+        But when many independent models agree, it starts to look like we found the right boundary.
+      </p>
+
+      <h2>From “computable” to “computer”</h2>
+      <p>
+        Once computation is defined, another idea becomes possible: <em>universality</em>.
+        Turing observed that one machine can simulate any other machine, if you give it a description of the other machine plus its input.
+        This is the conceptual ancestor of software: programs are descriptions stored as data.
+      </p>
+
+      <p>
+        This is also where “Turing-complete” comes from. A system is <em>Turing-complete</em> if it can simulate a universal Turing machine,
+        meaning it can express any computation that any general-purpose computer can (given enough time and memory).
+        Most real programming languages are Turing-complete. So are some surprising things: configuration languages, games, even spreadsheet formulas—if they allow the right kind of looping/recursion.
+      </p>
+
+      <p>
+        The stored-program architecture is the engineering version of universality:
+        keep program instructions in memory (like data), and have a processor fetch and execute them.
+        John von Neumann is closely associated with popularizing and systematizing this design.
+        Modern CPUs are still this idea with decades of engineering polish: caches, pipelines, branch prediction, speculative execution.
+      </p>
+
+      <h2>The first hard limit: the halting problem</h2>
+      <p>
+        Once you have a precise model, you can prove impossibility results.
+        The famous one is the <em>halting problem</em>:
+        given a program and an input, will the program eventually halt?
+        Turing showed there is no general algorithm that answers this correctly for all programs and inputs.
+      </p>
+
+      <p>
+        This matters beyond theory. It explains why certain “perfect” tools can’t exist:
+        a bug-finder that catches all infinite loops, a verifier that proves all interesting properties of all programs, a classifier that always decides termination.
+        You can build useful approximations, but not an infallible one for all cases.
+      </p>
+
+      <h2>After “can it be done?” comes “can it be done fast?”</h2>
+      <p>
+        Computability draws a yes/no boundary. Complexity theory asks about resources.
+        Many problems are computable but useless in practice because they require too much time or memory.
+      </p>
+
+      <p>
+        This is where P and NP enter. Roughly:
+        <strong>P</strong> is problems solvable in polynomial time (often treated as “efficient”),
+        and <strong>NP</strong> is problems where a proposed solution can be verified in polynomial time.
+        The central open question is:
+      </p>
+
+      <div class="math-block">P ?= NP</div>
+
+      <p>
+        If P were equal to NP, then problems where “checking is easy” would also be “solving is easy.”
+        That would reshape cryptography, optimization, scheduling, and more.
+        If they’re not equal (what most people suspect), it explains why huge classes of problems resist efficient algorithms.
+      </p>
+
+      <h2>What’s left?</h2>
+      <p>
+        By now the story connects: define computation → build universal machines → prove limits → study efficiency.
+        The frontier today is mostly in the last two parts: tighter lower bounds, better algorithms, better architectures, and better models of feasible computation.
+      </p>
+
+      <p>
+        Quantum computing fits into this picture. It doesn’t change what’s computable in principle; it changes costs for some tasks.
+        It’s not a new boundary, it’s a different complexity landscape.
+      </p>
+
+      <p>
+        So “what’s left?” isn’t a missing final invention. It’s the slow work of mapping the terrain:
+        what can be computed, what can’t, and what can be computed within the limits of time, memory, and energy.
+      </p>
+    </article>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/layout.js"></script>
+</body>
+</html>

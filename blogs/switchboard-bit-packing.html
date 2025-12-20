@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let the Computer Be a Switchboard - Manoj Khatri</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <article class="post">
+      <h1 class="post-title">Let the Computer Be a Switchboard</h1>
+      <div class="post-quote">"We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil" — Donald Knuth</div>
+      <div class="post-meta">Apr 27, 2022</div>
+
+      <p>
+        A computer is, at heart, a switchboard. Bits flip on and off.
+        Everything we call “operations”—addition, comparison, indexing—eventually collapses into that.
+      </p>
+
+      <p>
+        Most of the time, high-level code is the right deal: clearer, safer, and fast enough.
+        But occasionally you hit a place where data is huge or the same operation repeats millions of times.
+        That’s when it helps to remember what the computer really is.
+      </p>
+
+      <p>
+        Shifts are one of the simplest places where that “switchboard” view leaks into code.
+        They move bits left or right, which corresponds to multiplying or dividing by powers of two:
+      </p>
+      <div class="math-block">x &lt;&lt; n = x &times; 2<sup>n</sup></div>
+      <div class="math-block">x &gt;&gt; n = ⌊x / 2<sup>n</sup>⌋</div>
+
+      <p>
+        Where this becomes practical is representation.
+        If your values live in a known range, you can often pack them into a single integer.
+        Then comparisons become trivial, and the data becomes compact (which tends to behave better in caches).
+      </p>
+
+      <p>
+        For example, storing a date as three integers is the obvious approach:
+      </p>
+
+<pre><code>struct Date {
+  int year;
+  int month;
+  int day;
+};</code></pre>
+
+      <p>
+        This is perfectly fine when you have a handful of dates. The cost shows up at scale.
+        Three <code>int</code>s is typically 12 bytes, which means your date array or database column is wider than it needs to be.
+        Wider data doesn’t just waste memory; it burns cache. Fewer values fit in L1/L2/L3, and scans end up moving more bytes than work.
+      </p>
+
+      <p>
+        Comparisons also become a small decision tree: compare year, if equal compare month, if equal compare day.
+        That’s multiple loads and multiple conditional checks, and the “if equal” branches aren’t always predictable.
+        With millions of comparisons (sorting, filtering, joining), those tiny decisions add up.
+      </p>
+
+      <p>
+        If you only need dates in a constrained range, you can <em>pack</em> the fields into one integer.
+        “Pack” just means: store each field in a fixed bit-range inside a single number.
+        For example, day needs 5 bits (1–31), month needs 4 bits (1–12). If we put day in the lowest 5 bits,
+        month in the next 4 bits, then year starts after those 9 bits.
+      </p>
+
+      <p>Packing formula:</p>
+      <div class="math-block">x = (year &lt;&lt; 9) &nbsp;|&nbsp; (month &lt;&lt; 5) &nbsp;|&nbsp; day</div>
+
+      <p>
+        Here’s a concrete date: 2025-12-21.
+      </p>
+
+<pre><code>int year = 2025, month = 12, day = 21;
+int x = (year &lt;&lt; 9) | (month &lt;&lt; 5) | day;</code></pre>
+
+      <p>
+        Think of <code>x</code> as three compartments:
+        the lowest 5 bits hold the day, the next 4 bits hold the month, and everything above that holds the year.
+        You can recover the original fields like this:
+      </p>
+
+<div class="math-block">day = x &amp; 31</div>
+<div class="math-block">month = (x &gt;&gt; 5) &amp; 15</div>
+<div class="math-block">year = x &gt;&gt; 9</div>
+
+      <p>
+        Now the nice part: comparing two packed dates is a single integer comparison.
+        This works because the high bits are year, then month, then day—so the numeric order matches date order.
+      </p>
+
+      <p>
+        One caveat: the bit budget matters. If you want to fit into 16 bits (like some old formats did),
+        you usually store <code>year - baseYear</code> (for example, FAT stores “years since 1980”) instead of the full year.
+        If you don’t care about 16 bits, a 32-bit integer is plenty and keeps the same idea.
+      </p>
+
+      <h2>Where this shows up in real systems</h2>
+
+      <p>
+        This isn’t just a “bit trick.” A lot of real formats and systems are built this way because bytes add up.
+        When something is stored billions of times (or sent over the network billions of times), saving a few bits matters.
+      </p>
+
+      <h3>Filesystems: FAT timestamps</h3>
+      <p>
+        The classic example is the FAT filesystem. It stores a date in 16 bits:
+        5 bits for day, 4 bits for month, and the remaining 7 bits for “years since 1980.”
+        That’s basically the same packing idea—chosen because directory entries needed to be small.
+      </p>
+
+      <h3>Network protocols: headers are packed fields</h3>
+      <p>
+        Protocol headers are essentially packing specs. IPv4 packs the <em>version</em> (4 bits) and
+        <em>header length</em> (4 bits) into a single byte, and splits other fields into bit ranges.
+        TCP does something similar with its flags. The point is bandwidth: shaving even a byte from a ubiquitous header is worth it.
+      </p>
+
+      <h3>Databases: bitmaps everywhere</h3>
+      <p>
+        Databases often pack “metadata” into bits:
+        a null bitmap (one bit per column saying whether a value is NULL), boolean columns packed into bitsets,
+        and bitmap indexes where filters become fast bit operations. This is less about cleverness and more about scanning speed and memory.
+      </p>
+
+      <h3>Operating systems and hardware: flags in a word</h3>
+      <p>
+        OS internals lean heavily on packed fields. Page table entries combine a page number with permission bits
+        (present, writable, executable, dirty, accessed) in a single machine word. Unix file permissions are another everyday example:
+        a small set of flags packed into a few bits.
+      </p>
+
+      <h2>When not to do it</h2>
+      <p>
+        Packing is a trade: you gain density and sometimes speed, but you lose readability and flexibility.
+        And in C/C++, compiler “bitfields” can be non-portable in layout/endianness—manual shifts and masks are usually clearer about the format.
+        If you don’t have a real constraint (memory, bandwidth, hot-path performance), keep the obvious representation.
+      </p>
+
+      <p>
+        The point isn’t to turn every program into bit soup.
+        It’s to remember that under the abstractions there’s a switchboard,
+        and sometimes the best optimization is choosing a representation that matches the machine.
+      </p>
+    </article>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topgrad Notes - Manoj Khatri</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="site-header"></div>
+
+    <main>
+        <h1 class="page-title">Topgrad Notes</h1>
+        <p class="page-intro">Design notes for a one-file autodiff library built on NumPy.</p>
+
+        <div class="list">
+            <div class="list-item">
+                <h3>Goal</h3>
+                <p>Single-file autodiff (`tensor.py`) wrapping NumPy arrays as tensors, with forward/backward for core NN ops and attention.</p>
+            </div>
+            <div class="list-item">
+                <h3>Ops</h3>
+                <p>Softmax, ReLU, reshape, linear (matmul), conv via im2col, batch norm, layer norm, add, attention.</p>
+            </div>
+            <div class="list-item">
+                <h3>Optim</h3>
+                <p>Optimizers live in `optim.py` (SGD and friends).</p>
+            </div>
+            <div class="list-item">
+                <h3>Examples & Tests</h3>
+                <p>Examples under `examples/`; unit tests compare against PyTorch at tight tolerances.</p>
+            </div>
+            <div class="list-item">
+                <h3>Repo</h3>
+                <p><a href="https://github.com/mnjkhtri/topgrad" target="_blank" rel="noopener">github.com/mnjkhtri/topgrad</a></p>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/layout.js"></script>
+</body>
+</html>

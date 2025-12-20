@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Search Notes - Manoj Khatri</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="site-header"></div>
+
+    <main>
+        <h1 class="page-title">Nano Search Notes</h1>
+        <p class="page-intro">Notes on a minimal crawler + BM25 search CLI.</p>
+
+        <div class="list">
+            <div class="list-item">
+                <h3>Goal</h3>
+                <p>Asynchronous crawler and cleaner that writes cleaned text to Parquet, then ranks content with BM25.</p>
+            </div>
+            <div class="list-item">
+                <h3>Flow</h3>
+                <p>Crawl feeds, strip boilerplate (HTML, scripts, styles), store cleaned URLs + content, index, then query with BM25.</p>
+            </div>
+            <div class="list-item">
+                <h3>Ranking</h3>
+                <p>BM25 with IDF and length normalization; future slots for other ranking (e.g., PageRank).</p>
+            </div>
+            <div class="list-item">
+                <h3>Ideas</h3>
+                <p>Concurrent crawling/indexing and a small UI to browse results.</p>
+            </div>
+            <div class="list-item">
+                <h3>Repo</h3>
+                <p><a href="https://github.com/mnjkhtri/nano-search" target="_blank" rel="noopener">github.com/mnjkhtri/nano-search</a></p>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/layout.js"></script>
+</body>
+</html>
