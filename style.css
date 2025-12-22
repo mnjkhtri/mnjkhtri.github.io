@@ -217,10 +217,24 @@ section {
 }
 
 .list-item h3 {
-    margin: 0;
+    margin: 0 0 4px 0;
     font-weight: 500;
     letter-spacing: -0.05px;
     font-size: 16px;
+}
+
+.list-item .link {
+    color: #0b5ed7;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.list-item h3 .link {
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .dense-list {
