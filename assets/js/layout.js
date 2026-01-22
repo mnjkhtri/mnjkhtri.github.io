@@ -18,7 +18,7 @@
             });
     }
 
-    loadFragment('site-header', 'partials/header.html', (root) => {
+    loadFragment('site-header', 'header.html', (root) => {
         const segments = window.location.pathname.replace(/^\/+/, '').split('/');
         const section = segments[0] || 'index.html';
         root.querySelectorAll('.nav-links a').forEach((link) => {
@@ -31,5 +31,5 @@
         });
     });
 
-    loadFragment('site-footer', 'partials/footer.html');
+    loadFragment('site-footer', 'footer.html');
 })();
