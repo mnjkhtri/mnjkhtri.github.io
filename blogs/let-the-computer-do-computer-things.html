@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Let the Computer Be a Switchboard - Manoj Khatri</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <title>Let the Computer Do Computer Things - Manoj Khatri</title>
+  <link rel="stylesheet" href="/_assets/css/style.css">
 </head>
 <body>
   <div id="site-header"></div>
 
   <main>
     <article class="post">
-      <h1 class="post-title">Let the Computer Be a Switchboard</h1>
+      <h1 class="post-title">Let the Computer Do Computer Things</h1>
       <div class="post-quote">"We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil" — Donald Knuth</div>
       <div class="post-meta">Apr 27, 2022</div>
 
@@ -99,35 +99,35 @@ int x = (year &lt;&lt; 9) | (month &lt;&lt; 5) | day;</code></pre>
         If you don’t care about 16 bits, a 32-bit integer is plenty and keeps the same idea.
       </p>
 
-      <h2>Where this shows up in real systems</h2>
+      <h2>Where it shows up</h2>
 
       <p>
         This isn’t just a “bit trick.” A lot of real formats and systems are built this way because bytes add up.
         When something is stored billions of times (or sent over the network billions of times), saving a few bits matters.
       </p>
 
-      <h3>Filesystems: FAT timestamps</h3>
+      <h3>Filesystems</h3>
       <p>
         The classic example is the FAT filesystem. It stores a date in 16 bits:
         5 bits for day, 4 bits for month, and the remaining 7 bits for “years since 1980.”
         That’s basically the same packing idea—chosen because directory entries needed to be small.
       </p>
 
-      <h3>Network protocols: headers are packed fields</h3>
+      <h3>Network protocols</h3>
       <p>
         Protocol headers are essentially packing specs. IPv4 packs the <em>version</em> (4 bits) and
         <em>header length</em> (4 bits) into a single byte, and splits other fields into bit ranges.
         TCP does something similar with its flags. The point is bandwidth: shaving even a byte from a ubiquitous header is worth it.
       </p>
 
-      <h3>Databases: bitmaps everywhere</h3>
+      <h3>Databases</h3>
       <p>
         Databases often pack “metadata” into bits:
         a null bitmap (one bit per column saying whether a value is NULL), boolean columns packed into bitsets,
         and bitmap indexes where filters become fast bit operations. This is less about cleverness and more about scanning speed and memory.
       </p>
 
-      <h3>Operating systems and hardware: flags in a word</h3>
+      <h3>OS and hardware</h3>
       <p>
         OS internals lean heavily on packed fields. Page table entries combine a page number with permission bits
         (present, writable, executable, dirty, accessed) in a single machine word. Unix file permissions are another everyday example:
@@ -150,6 +150,6 @@ int x = (year &lt;&lt; 9) | (month &lt;&lt; 5) | day;</code></pre>
   </main>
 
   <div id="site-footer"></div>
-  <script src="/assets/js/layout.js"></script>
+  <script src="/_assets/js/layout.js"></script>
 </body>
 </html>

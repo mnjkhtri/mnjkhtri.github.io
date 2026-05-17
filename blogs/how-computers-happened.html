@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How Modern Computers Came To Be (and What’s Left?) - Manoj Khatri</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <title>How Computers Happened - Manoj Khatri</title>
+  <link rel="stylesheet" href="/_assets/css/style.css">
 </head>
 <body>
   <div id="site-header"></div>
 
   <main>
     <article class="post">
-      <h1 class="post-title">How Modern Computers Came To Be (and What’s Left?)</h1>
-      <div class="post-quote">“A computer would deserve to be called intelligent if it could deceive a human into believing that it was human. - Alan Turng (probably)”</div>
+      <h1 class="post-title">How Computers Happened</h1>
+      <div class="post-quote">“A computer would deserve to be called intelligent if it could deceive a human into believing that it was human.” - Alan Turing</div>
       <div class="post-meta">May 05, 2022</div>
 
       <p>
@@ -22,12 +22,14 @@
 
       <p>
         At first this sounds like philosophy. But it isn’t. If you can define “mechanical procedure” precisely, then you can do three practical things:
-        (1) tell what problems are solvable by any program at all,
-        (2) explain why some problems can’t be solved no matter how clever you are,
-        and (3) design a single general machine that can run many different procedures—what we now call a computer.
       </p>
+      <ol>
+        <li>Tell what problems are solvable by any program at all.</li>
+        <li>Explain why some problems cannot be solved no matter how clever you are.</li>
+        <li>Design one general machine that can run many different procedures.</li>
+      </ol>
 
-      <h2>Why mathematicians cared first</h2>
+      <h2>Math people started it</h2>
       <p>
         Euclid showed that a small set of axioms can generate a large body of geometry.
         In the early 20th century, David Hilbert wanted a similar foundation for all of mathematics:
@@ -40,7 +42,7 @@
         The moment you ask that, you’re forced to define what “mechanical method” even means.
       </p>
 
-      <h2>Defining “effective procedure”</h2>
+      <h2>What counts as calculation</h2>
       <p>
         Several researchers tried to capture the same intuition in different ways.
         One route was function-first: define a class of “calculable” functions from simple base cases and closure rules
@@ -65,7 +67,7 @@
         But when many independent models agree, it starts to look like we found the right boundary.
       </p>
 
-      <h2>From “computable” to “computer”</h2>
+      <h2>From computable to computer</h2>
       <p>
         Once computation is defined, another idea becomes possible: <em>universality</em>.
         Turing observed that one machine can simulate any other machine, if you give it a description of the other machine plus its input.
@@ -85,7 +87,7 @@
         Modern CPUs are still this idea with decades of engineering polish: caches, pipelines, branch prediction, speculative execution.
       </p>
 
-      <h2>The first hard limit: the halting problem</h2>
+      <h2>The halting problem</h2>
       <p>
         Once you have a precise model, you can prove impossibility results.
         The famous one is the <em>halting problem</em>:
@@ -99,7 +101,7 @@
         You can build useful approximations, but not an infallible one for all cases.
       </p>
 
-      <h2>After “can it be done?” comes “can it be done fast?”</h2>
+      <h2>Can it be fast?</h2>
       <p>
         Computability draws a yes/no boundary. Complexity theory asks about resources.
         Many problems are computable but useless in practice because they require too much time or memory.
@@ -107,8 +109,8 @@
 
       <p>
         This is where P and NP enter. Roughly:
-        <strong>P</strong> is problems solvable in polynomial time (often treated as “efficient”),
-        and <strong>NP</strong> is problems where a proposed solution can be verified in polynomial time.
+        P is problems solvable in polynomial time (often treated as “efficient”),
+        and NP is problems where a proposed solution can be verified in polynomial time.
         The central open question is:
       </p>
 
@@ -120,7 +122,7 @@
         If they’re not equal (what most people suspect), it explains why huge classes of problems resist efficient algorithms.
       </p>
 
-      <h2>What’s left?</h2>
+      <h2>What is left?</h2>
       <p>
         By now the story connects: define computation → build universal machines → prove limits → study efficiency.
         The frontier today is mostly in the last two parts: tighter lower bounds, better algorithms, better architectures, and better models of feasible computation.
@@ -139,6 +141,6 @@
   </main>
 
   <div id="site-footer"></div>
-  <script src="/assets/js/layout.js"></script>
+  <script src="/_assets/js/layout.js"></script>
 </body>
 </html>

@@ -1,10 +1,9 @@
 (function () {
-    const rootPath = `${window.location.origin}`;
-
     function loadFragment(targetId, fragmentPath, onload) {
         const host = document.getElementById(targetId);
         if (!host) return;
-        fetch(`${rootPath}/${fragmentPath}`)
+
+        fetch(`/${fragmentPath}`)
             .then((res) => {
                 if (!res.ok) throw new Error(res.statusText);
                 return res.text();
@@ -18,7 +17,7 @@
             });
     }
 
-    loadFragment('site-header', 'header.html', (root) => {
+    loadFragment('site-header', '_includes/header.html', (root) => {
         const segments = window.location.pathname.replace(/^\/+/, '').split('/');
         const section = segments[0] || 'index.html';
         root.querySelectorAll('.nav-links a').forEach((link) => {
@@ -31,5 +30,5 @@
         });
     });
 
-    loadFragment('site-footer', 'footer.html');
+    loadFragment('site-footer', '_includes/footer.html');
 })();

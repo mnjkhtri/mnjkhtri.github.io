@@ -37,23 +37,6 @@ nav {
     gap: 12px;
 }
 
-.nav-home {
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--text);
-    letter-spacing: -0.2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--text);
-}
-
 .nav-links {
     display: flex;
     flex-wrap: wrap;
@@ -109,31 +92,8 @@ p {
     margin-bottom: 12px;
 }
 
-.subtitle {
-    color: var(--muted);
-    margin-bottom: 12px;
-}
-
-.lede {
-    max-width: 760px;
-    margin-bottom: 12px;
-}
-
-.intro {
-    margin-bottom: 20px;
-}
-
-.inline-links {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-}
-
-.inline-links a {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
+.timeline-note {
+    margin-bottom: 4px;
 }
 
 section {
@@ -192,6 +152,11 @@ section {
     white-space: nowrap;
 }
 
+.timeline-lines {
+    margin-top: 2px;
+    line-height: 1.32;
+}
+
 
 .list {
     display: grid;
@@ -237,6 +202,12 @@ section {
     font-weight: 500;
 }
 
+.muted-note {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
 .dense-list {
     gap: 0;
     margin-bottom: 32px;
@@ -246,24 +217,29 @@ section {
     padding: 0;
 }
 
-.grid {
+.post-list {
     display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 34px;
+    margin-top: 28px;
 }
 
-.card {
-    border: 1px solid var(--line);
-    background: #fafafa;
-    padding: 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: var(--text);
-}
-
-.card p {
+.post-list-date {
     color: var(--muted);
-    margin: 0;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.post-list-item a {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.35px;
+    line-height: 1.35;
+    text-decoration: none;
+}
+
+.post-list-item a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .post {
@@ -280,6 +256,44 @@ section {
 .post-meta {
     color: var(--muted);
     font-size: 14px;
+}
+
+.post h2 {
+    font-size: 18px;
+    margin: 16px 0 0;
+}
+
+.post h3 {
+    font-size: 15px;
+    margin: 8px 0 0;
+}
+
+.post ol,
+.post ul {
+    margin: 0;
+    padding-left: 0;
+}
+
+.post li {
+    white-space: normal;
+}
+
+.post ol {
+    counter-reset: post-list;
+    display: grid;
+    gap: 4px;
+    list-style: none;
+}
+
+.post ol li {
+    counter-increment: post-list;
+    display: grid;
+    grid-template-columns: 24px 1fr;
+}
+
+.post ol li::before {
+    content: counter(post-list) ".";
+    color: var(--muted);
 }
 
 .post-quote {
@@ -308,13 +322,6 @@ pre code {
     padding: 0;
 }
 
-.math-inline {
-    font-family: "Times New Roman", Georgia, serif;
-    background: #f9f9f9;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
 .math-block {
     display: block;
     font-family: "Times New Roman", Georgia, serif;
@@ -338,16 +345,6 @@ pre code {
 .section-heading span {
     color: var(--muted);
     font-size: 14px;
-}
-
-.video-grid {
-    display: grid;
-    gap: 12px;
-}
-
-.video-meta {
-    color: var(--muted);
-    font-size: 13px;
 }
 
 .page-title {
